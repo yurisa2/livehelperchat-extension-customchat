@@ -11,6 +11,7 @@ class erLhcoreClassExtensionCustomchat {
 		$dispatcher = erLhcoreClassChatEventDispatcher::getInstance();
 		
 		$dispatcher->listen('chat.web_add_msg_admin',array($this,'opMsg'));
+				$dispatcher->listen('chat.cannedmsg',array($this,'canUseopMsgCannedMessages'));
 		// $dispatcher->listen('file.uploadfileadmin.file_path',array($this,'uploadFile'));
 		// $dispatcher->listen('file.uploadfile.file_path',array($this,'uploadFile'));
 	}
