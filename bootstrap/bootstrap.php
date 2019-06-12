@@ -11,8 +11,8 @@ class erLhcoreClassExtensionCustomchat {
 		$dispatcher = erLhcoreClassChatEventDispatcher::getInstance();
 		
 		$dispatcher->listen('chat.web_add_msg_admin',array($this,'opMsg'));
-		// $dispatcher->listen('chat.auto_responder_triggered',array($this,'opAutoRes'));
-		$dispatcher->listen('chat.before_auto_responder_message',array($this,'opAutoRes'));
+		$dispatcher->listen('chat.auto_responder_triggered',array($this,'opAutoRes'));
+		// $dispatcher->listen('chat.before_auto_responder_message',array($this,'opAutoRes'));
 		
 	}
 	
@@ -39,7 +39,7 @@ class erLhcoreClassExtensionCustomchat {
 		$params->msg->msg = $params->responder->wait_message;
 		$params->msg->name_support = $params->responder->operator;
 		
-		
+		echo "<pre>";
 		var_dump($params);
 		
 		$data = array('params' => json_encode($params));
