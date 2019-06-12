@@ -34,7 +34,7 @@ class erLhcoreClassExtensionCustomchat {
 	
 	public function opAutoRes($params) {
 	
-	file_put_contents(json_encode($params));
+	file_put_contents("AutoRes.json",json_encode($params));
 	
 	}
 	
