@@ -11,7 +11,7 @@ class erLhcoreClassExtensionCustomchat {
 		$dispatcher = erLhcoreClassChatEventDispatcher::getInstance();
 		
 		$dispatcher->listen('chat.web_add_msg_admin',array($this,'opMsg'));
-		$dispatcher->listen('chat.auto_responder_triggered',array($this,'opMsg'));
+		$dispatcher->listen('chat.auto_responder_triggered',array($this,'opAutoRes'));
 		// $dispatcher->listen('file.uploadfileadmin.file_path',array($this,'uploadFile'));
 		// $dispatcher->listen('file.uploadfile.file_path',array($this,'uploadFile'));
 	}
@@ -30,6 +30,12 @@ class erLhcoreClassExtensionCustomchat {
 		);
 		$context  = stream_context_create($options);
 		$result = file_get_contents($ws_url_base.'/wapp-LHC-Bridge/out_wapp_hook.php', false, $context);
+	}
+	
+	public function opAutoRes($params) {
+	
+	file_put_contents(json_encode($params));
+	
 	}
 	
 }
