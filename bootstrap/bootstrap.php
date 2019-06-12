@@ -39,6 +39,9 @@ class erLhcoreClassExtensionCustomchat {
 		$params->msg->msg = $params->responder->wait_message;
 		$params->msg->name_support = $params->responder->operator;
 		
+		
+		var_dump($params);
+		
 		$data = array('params' => json_encode($params));
 		
 		$options = array(
