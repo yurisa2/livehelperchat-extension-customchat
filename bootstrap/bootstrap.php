@@ -37,26 +37,20 @@ class erLhcoreClassExtensionCustomchat {
 		
 		include '../wapp-LHC-Bridge/include/config.php';
 		
+		$params = json_encode($params);
+		$params = json_decode($params);
+		
 		$params2 = new StdClass;
 		$params2->msg = new StdClass;
 		
 		$params2->chat = new StdClass;
 		$params2->chat = $params->chat;
-			
-		file_put_contents("opAutoResParam1.json",json_encode($params));
-		file_put_contents("opAutoResParam2.json",json_encode($params2));
-		
+				
 		$params2->msg->msg = $params->responder->wait_message;
 		$params2->msg->name_support = $params->responder->operator;
 		
-		file_put_contents("autoALO.json",json_encode($params2));
 		
-		
-		
-		echo "<pre>";
-		var_dump($params);
-		
-		$data = array('params' => json_encode($params));
+		$data = array('params' => json_encode($params2));
 		
 		$options = array(
 			'http' => array(
