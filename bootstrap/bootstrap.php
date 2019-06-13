@@ -11,8 +11,8 @@ class erLhcoreClassExtensionCustomchat {
 		$dispatcher = erLhcoreClassChatEventDispatcher::getInstance();
 		
 		$dispatcher->listen('chat.web_add_msg_admin',array($this,'opMsg'));
-		$dispatcher->listen('chat.auto_responder_triggered',array($this,'opAutoRes'));
-		// $dispatcher->listen('chat.before_auto_responder_message',array($this,'opAutoRes'));
+		// $dispatcher->listen('chat.auto_responder_triggered',array($this,'opAutoRes'));
+		$dispatcher->listen('chat.before_auto_responder_message',array($this,'opAutoRes'));
 		
 	}
 	
@@ -34,10 +34,23 @@ class erLhcoreClassExtensionCustomchat {
 	
 	public function opAutoRes($params) {
 	ini_set("display_errors","on");
+		
 		include '../wapp-LHC-Bridge/include/config.php';
 		
-		$params->msg->msg = $params->responder->wait_message;
-		$params->msg->name_support = $params->responder->operator;
+		$params2 = new StdClass;
+		$params2->msg = new StdClass;
+		
+		$params2->chat = new StdClass;
+		$params2->chat = $params->chat;
+			
+		
+		
+		$params2->msg->msg = $params->responder->wait_message;
+		$params2->msg->name_support = $params->responder->operator;
+		
+		file_put_contents("autoALO.json",json_encode($params2));
+		
+		
 		
 		echo "<pre>";
 		var_dump($params);
@@ -53,9 +66,6 @@ class erLhcoreClassExtensionCustomchat {
 		);
 		$context  = stream_context_create($options);
 		$result = file_get_contents($ws_url_base.'/wapp-LHC-Bridge/out_wapp_hook.php', false, $context);
-	
-	
-	
 	}
 	
 }
